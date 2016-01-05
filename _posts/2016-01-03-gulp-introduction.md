@@ -10,7 +10,6 @@
 1. 在我的项目中使用gulp —— (ejs + sass)
 1. 我认为的文件目录结构 —— app, build*
 1. 我的gulpfile.js详解
-1. 我爱用的gulp插件
 1. 寻找好用的gulp插件 —— cnpmjs.org
 
 <hr>
@@ -420,6 +419,9 @@ PS:其中，经过我的机器与宇阳的机器两次的测试，插件`gulp-im
 		cache = require('gulp-cache');
 	
 	// 更为推荐的写法。为每个任务配置一个config，包括src(源文件目录)，dest(目标文件目录)，fieldlist(为ejs而配), ...
+	// 同时推荐npm自带的插件path。它可以为我们的路径进行处理。
+	// __dirname是nodejs一运行就给出的变量，它代表着我们当前目录的位置。
+
 	var config = {
 		ejs: {
 			src: ['./app/*.ejs'],
@@ -449,7 +451,12 @@ PS:其中，经过我的机器与宇阳的机器两次的测试，插件`gulp-im
 		console.log('	gulp sass			打包sass');
 	});
 	
-	
+	// 编译ejs。因为ejs的每一个生成的页面都可以导入数据，但是目前还没有很好的导入方法。
+	// 说说我的做法：
+	//1、在项目根目录下编写一个ejsData.json的文件；
+	// 2、在gulpfile.js的config.ejs中加入filelist这一个属性，主要是放各个需要编译的页面；
+	// 3、在ejs这个任务里面用一个for循环将数据打进去
+
 	gulp.task('ejs', function () {
 		var ejsData = require('./app/ejsData.json');
 		for(var i=0, len=config.ejs.filelist.length; i<len; i++){
@@ -460,6 +467,7 @@ PS:其中，经过我的机器与宇阳的机器两次的测试，插件`gulp-im
 		}
 	});
 	
+	// 编译sass。这个算是一个意外，因为在本机，如果使用了gulp.src,则会报错，只能直接使用sass这个命令，将路径导入其中。
 	gulp.task('sass', function () {
 	    sass(config.sass.src, { compass: true, style: 'expanded' })
 			.pipe(autoprefixer({
@@ -474,6 +482,9 @@ PS:其中，经过我的机器与宇阳的机器两次的测试，插件`gulp-im
 	});
 	
 	// 因为网络的原因，暂时无法使用
+	// 最佳选择：直接使用gulp-imagemin。其中包括imagemin-pngquant, imagemin-jpegtran, imagemin-optipng等。
+	// 具体可以上www.npmjs.com搜索imagemin查看。
+
 	// gulp.task('imagemin', function () {
 	// 	gulp.src( config.image.src )
 	// 		.pipe(imagemin({
@@ -484,7 +495,14 @@ PS:其中，经过我的机器与宇阳的机器两次的测试，插件`gulp-im
 	// 		.pipe( gulp.dest(config.image.dest) )
 	// 		.pipe(livereload());
 	// })
+
+	// gulp.task('imageminPngquant', function () {
+	// 	return gulp.src('app/images/*.png')
+	// 		.pipe(imageminPngquant({quality: '65-80', speed: 4})())
+	// 		.pipe(gulp.dest('build/images'));
+	// });
 	
+	// 这个是watch命令，是用以编辑我们所需要监听的任务
 	gulp.task('watch', function () {
 		livereload.listen();
 		// watch .ejs files
@@ -495,6 +513,7 @@ PS:其中，经过我的机器与宇阳的机器两次的测试，插件`gulp-im
 		// gulp.watch( config.image.src, ['imagemin']);
 	})
 	
+	// 这个是为我们创建服务器的命令。port可以自定义设置。
 	gulp.task('connect', function() {
 		connect.server({
 			root: ['./'],
@@ -503,6 +522,7 @@ PS:其中，经过我的机器与宇阳的机器两次的测试，插件`gulp-im
 		});
 	})
 	
+	// 这是'build'命令，创建它目的在于，将所有需要build的任务都集成在一起，方便编辑使用。
 	gulp.task('build', function () {
 		gulp.run('help');
 		gulp.run('connect');
@@ -510,6 +530,7 @@ PS:其中，经过我的机器与宇阳的机器两次的测试，插件`gulp-im
 		gulp.run('sass');
 	})
 	
+	// 这是default命令，是gulp默认的缺省任务，当只运行gulp时，默认执行它。
 	gulp.task('default', function () {
 		gulp.run('build');
 		gulp.run('watch');
@@ -518,7 +539,18 @@ PS:其中，经过我的机器与宇阳的机器两次的测试，插件`gulp-im
 
 <hr>
 
-### 11. 寻找好用的gulp插件 —— cnpmjs.org ###
-由于公司的网络中，[www.npmjs.com](www.npmjs.com)被墙，因此我们可以使用淘宝源的包管理网站[www.cnpmjs.org](www.cnpmjs.org)来暂时替代。
+path, 
 
+### 10. 寻找好用的gulp插件 —— www.npmjs.com ###
+[gulp插件地址：http://gulpjs.com/plugins](http://gulpjs.com/plugins)
+
+![](http://i.imgur.com/RZ91UmB.png)
+
+**大家可以登录[gulp插件地址：http://gulpjs.com/plugins](http://gulpjs.com/plugins)来搜索自己需要的插件。这个网站是npmjs的官方网站，在里面我们可以搜索所有的npm第三方插件。**
+
+**关于npm的插件，我们可以通过[www.npmjs.com](www.npmjs.com)来搜索。加上gulp关键字，我们便可以搜索相应的gulp插件。**
+![](http://i.imgur.com/qpJxOFB.png)
+
+- - -
+**[www.cnpmjs.org](www.cnpmjs.org)。这个也是一个同类型的网站，当www.npmjs.com登陆不上时，我们可以通过它来搜索插件。**
 ![](http://i.imgur.com/6pjnGBX.png)

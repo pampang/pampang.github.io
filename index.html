@@ -1,263 +1,41 @@
-<!DOCTYPE html>
-<html lang="en-us">
-  <head>
-    <meta charset="UTF-8">
-    <title>Pampang.GitHub.io/gulp-intro by pampang</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
-  </head>
-  <body>
-    <section class="page-header">
-      <h1 class="project-name">Pampang.GitHub.io/gulp-intro</h1>
-      <h2 class="project-tagline">庞校长的博客</h2>
-    </section>
+---
+layout: page
+description: "庞伟湛"
+---
 
-    <section class="main-content">
-      <h2>
-<a id="gulp简单介绍--庞伟湛pam" class="anchor" href="#gulp%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D--%E5%BA%9E%E4%BC%9F%E6%B9%9Bpam" aria-hidden="true"><span class="octicon octicon-link"></span></a>gulp简单介绍 —— 庞伟湛PAM</h2>
-
-<h4>
-<a id="目录" class="anchor" href="#%E7%9B%AE%E5%BD%95" aria-hidden="true"><span class="octicon octicon-link"></span></a><em>目录</em>
-</h4>
-
-<ol>
-<li>gulp简介</li>
-<li>nodejs和npm</li>
-<li>创建一个npm项目 —— npm init .</li>
-<li>为我的项目安装npm插件 —— npm install ***</li>
-<li>gulp编写简述 —— gulp.***</li>
-<li>在我的项目中使用gulp —— (ejs + sass)</li>
-<li>我认为的文件目录结构 —— app, build*</li>
-<li>我爱用的gulp插件</li>
-<li>寻找好用的gulp插件 —— cnpmjs.org</li>
-</ol>
+{% for post in paginator.posts %}
+<div class="post-preview">
+    <a href="{{ post.url | prepend: site.baseurl }}">
+        <h2 class="post-title">            
+            {{ post.title }}
+        </h2>
+        {% if post.subtitle %}
+        <h3 class="post-subtitle">
+            {{ post.subtitle }}
+        </h3>
+        {% endif %}
+        <div class="post-content-preview">
+            {{ post.content | strip_html | truncate:150 }}
+        </div>
+    </a>
+    <p class="post-meta">Posted by {% if post.author %}{{ post.author }}{% else %}{{ site.title }}{% endif %} on {{ post.date | date: "%B %-d, %Y" }}</p>
+</div>
 
 <hr>
+{% endfor %}
 
-<h3>
-<a id="1-gulp简介" class="anchor" href="#1-gulp%E7%AE%80%E4%BB%8B" aria-hidden="true"><span class="octicon octicon-link"></span></a>1. gulp简介</h3>
-
-<p>引入百度链接
-gulp是一块自动化构建工具。</p>
-
-<hr>
-
-<h3>
-<a id="2-nodejs和npm" class="anchor" href="#2-nodejs%E5%92%8Cnpm" aria-hidden="true"><span class="octicon octicon-link"></span></a>2. nodejs和npm</h3>
-
-<p>引入nodejs下载地址，介绍win7下的安装方法，如何设置环境变量。同时介绍npm，node package manager。</p>
-
-<p>同时，您需要一个<strong>命令行环境</strong>来执行nodejs的命令。
-    - 在windows下，我推荐使用PowerCmd来进行window的原生命令行环境，它可以在一个窗口内同时启动多个cmd进程。
-    - 同时推荐安装git bash来进行类linux的命令环境，我们也可以通过git bash来进行git的命令行操作。</p>
-
-<hr>
-
-<h3>
-<a id="3-创建一个npm项目--npm-init-" class="anchor" href="#3-%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AAnpm%E9%A1%B9%E7%9B%AE--npm-init-" aria-hidden="true"><span class="octicon octicon-link"></span></a>3. 创建一个npm项目 —— npm init .</h3>
-
-<p>我们可以通过在命令行中输入：<code>node init yourDir</code>来实现一个基本项目的创建。</p>
-
-<p>下面我将演示如何创建一个npm管理项目。</p>
-
-<pre><code>// 假设我正处于F盘，并使用git bash命令行环境
-</code></pre>
-
-<ol>
-<li>
-<code>mkdir test</code> <em>//创建文件夹test</em>
-</li>
-<li>
-<code>cd test</code>    <em>//进入到test文件夹中</em>
-</li>
-<li>
-<code>npm init .</code> <em>//创建npm管理项目</em>
-</li>
-<li>根据提示输入信息(包括name, version, description等)，直接按<strong>回车</strong>可以选择默认输入。</li>
-<li>信息录入完整后，会出现整个package.json的内容，确认无误后，输入<strong>yes</strong>完成项目创建。</li>
-<li>这时候我们会发现test目录下多了package.json文件。
-
-<ol>
-<li>"devDependencies"与"dependencies"。</li>
-<li>在package.json中，"devDependencies"这一项意味着所安装的插件是开发所依赖的插件，在正式上线时不会用上。</li>
-<li>而"dependencies"这一项意味着所安装的插件是生产所依赖的插件，是使用于生产环境中的。</li>
-</ol>
-</li>
-</ol>
-
-<hr>
-
-<h3>
-<a id="4-为我的项目安装npm插件--npm-install-" class="anchor" href="#4-%E4%B8%BA%E6%88%91%E7%9A%84%E9%A1%B9%E7%9B%AE%E5%AE%89%E8%A3%85npm%E6%8F%92%E4%BB%B6--npm-install-" aria-hidden="true"><span class="octicon octicon-link"></span></a>4. 为我的项目安装npm插件 —— npm install ***</h3>
-
-<p>通过在命令行中输入  <code>npm install plugIn__name</code>  来进行nodeJS插件的安装，例如gulp插件：<code>npm install gulp --save-dev</code>。</p>
-
-<p>其中我们可以在命令的后面加上各种参数，来实现我们想要的效果。例如：</p>
-
-<pre><code>// 以下均以安装gulp插件为例
-</code></pre>
-
-<ol>
-<li>
-<code>npm install</code> 可以缩写为<code>npm i</code>。</li>
-<li>
-<code>npm i gulp -g</code>
-
-<ul>
-<li>
-<code>-g</code>意味着在全局范围内安装gulp插件。</li>
-<li>gulp插件会被安装在c盘下的global_modules中。</li>
-<li>安装完成后，在电脑的任意npm项目中，我们都可以使用到所安装的gulp插件，意味着，gulp插件已经<strong>全局化</strong>了。</li>
+<!-- Pager -->
+{% if paginator.total_pages > 1 %}
+<ul class="pager">
+    {% if paginator.previous_page %}
+    <li class="previous">
+        <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&larr; Newer Posts</a>
+    </li>
+    {% endif %}
+    {% if paginator.next_page %}
+    <li class="next">
+        <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">Older Posts &rarr;</a>
+    </li>
+    {% endif %}
 </ul>
-</li>
-<li>
-<code>npm i gulp --save-dev</code>。 
-
-<ul>
-<li>命令执行完后，打开package.json，发现<code>"devDependencies"</code>下多了<code>"gulp": "^3.9.0"</code>这一项。</li>
-<li>
-<code>--save-dev</code>意味着我们会将gulp插件安装在开发依赖下，也就是"devDependencies"中了。</li>
-</ul>
-</li>
-<li>
-<code>npm i gulp --save</code>。
-
-<ul>
-<li>本命令<code>--save</code>与<code>--save-dev</code>属于同类型命令，都会改写package.json的中的依赖列表。</li>
-<li>命令执行完后，打开package.json，发现<code>"devDependencies"</code>下多了<code>"gulp": "^3.9.0"</code>这一项。</li>
-<li>
-<code>--save-dev</code>意味着我们会将gulp插件安装在生产依赖下，也就是"dependencies"中。</li>
-</ul>
-</li>
-</ol>
-
-<p>待补充待补充待补充待补充待补充待补充待补充待补充待补充</p>
-
-<hr> 
-
-<h3>
-<a id="5-gulp编写简述--gulp" class="anchor" href="#5-gulp%E7%BC%96%E5%86%99%E7%AE%80%E8%BF%B0--gulp" aria-hidden="true"><span class="octicon octicon-link"></span></a>5. gulp编写简述 —— gulp.***</h3>
-
-<p>gulp的方法非常简单，只有5中，分别是：</p>
-
-<p>gulp.src
-gulp.dest
-1. gulp.task:
-1. gulp.watch:
-1. gulp.</p>
-
-<hr>
-
-<h3>
-<a id="6-在我的项目中使用gulp--ejs--sass" class="anchor" href="#6-%E5%9C%A8%E6%88%91%E7%9A%84%E9%A1%B9%E7%9B%AE%E4%B8%AD%E4%BD%BF%E7%94%A8gulp--ejs--sass" aria-hidden="true"><span class="octicon octicon-link"></span></a>6. 在我的项目中使用gulp —— (ejs + sass)</h3>
-
-<h2>
-<a id="html" class="anchor" href="#html" aria-hidden="true"><span class="octicon octicon-link"></span></a>html</h2>
-
-<p>在开发“后台语音在线系统”时，我深深的感到了html模板化的重要性。结合之前自己的一些个人心得，我在进行“奇迹战神”的移动端官网时，做了大胆的尝试，将传统的*.html使用模板工具代替。</p>
-
-<p>使用另类模板取替传统的*.html有如下好处：</p>
-
-<blockquote>
-<p>1、实现html组件化。我们可以将一个html页面拆分成很多的模板，通过导入实现引用。
-2、实现内容变量化。例如每一个页面的title等。
-3、实现html中嵌入程序性语言，例如if语句，for语句等。</p>
-</blockquote>
-
-<h4>
-<a id="jade" class="anchor" href="#jade" aria-hidden="true"><span class="octicon octicon-link"></span></a>jade</h4>
-
-<p>一开始所使用的，是<strong>jade模板</strong>。jade是一款非常简洁的模板化工具，能让我们远离标签化的html书写格式。但在本人使用下来，由于：</p>
-
-<blockquote>
-<p>1、全新的书写习惯，学习成本高，团队迁移难度更大；
-2、jade编译后的文档，展开之后，并不能如我所愿的将所有元素都按照想要的形式美化，而是“内联元素会跟随在块级元素内”。强迫症的我找了很多Html美化的插件，均无法解决此问题。</p>
-</blockquote>
-
-<p>因此，<strong>放弃使用jade</strong>。</p>
-
-<h4>
-<a id="ejs" class="anchor" href="#ejs" aria-hidden="true"><span class="octicon octicon-link"></span></a>ejs</h4>
-
-<p>接着尝试着使用了<strong>ejs模板</strong>。ejs较之html相比，在格式和内容上并没有太多的差别，感觉更像是在html的基础之上进行的功能性优化，其中包括：</p>
-
-<blockquote>
-<p>1、html模板化，例如header和footer这类通用性的组件，我们从此可以直接导入即可，非常方便。同时，我们也可以实现<strong>组件化开发</strong>。
-2、通过ejs生成出来的文件，可以保持原有的编辑格式，通过拼凑的形式实现html的生成。强迫症的我从此不用再让妈妈担心啦~ </p>
-</blockquote>
-
-<p>但是ejs也是有其缺点的，主要体现在其繁琐的变量书写格式上。<code>&lt;% ... %&gt;</code>尖括号与百分号结合的变量格式让我吐槽不已，比起<code>{{ ... }}</code>的双大括号格式，复杂了很多。</p>
-
-<h4>
-<a id="art-template" class="anchor" href="#art-template" aria-hidden="true"><span class="octicon octicon-link"></span></a>art template</h4>
-
-<p>art template原先我是并不清楚的，经过勇哥介绍之后，我才恍如隔世的回去开始深入理解这一个html模板。研究结果如下：</p>
-
-<blockquote>
-<p>1、art template是由腾讯上海研究中心(没有猜错，即张鑫旭所在地)所创作的。
-2、本模板是通过js的方式进行编译，具有高性能、简洁易用的优点。(这是官方介绍，实际我并没有深入理解，如有偏颇，请不要打我。) 
-3、art template结合了ejs和jade的优点，在html标记化格式的基础之上，同时兼容<code>&lt;% ... %&gt;</code>和<code>{{ ... }}</code>的变量写法，我认为非常的方便。
-4、关于art template这一块，在gulp上并没有很好的构建插件，只有一个没有介绍的gulp-arttemplate插件。由于没有介绍，无法知晓该插件的使用方法，因此作废。</p>
-</blockquote>
-
-<p>综上，最终选定使用ejs作为html模板，但是art template潜力巨大。</p>
-
-<h2>
-<a id="css" class="anchor" href="#css" aria-hidden="true"><span class="octicon octicon-link"></span></a>CSS</h2>
-
-<p>关于css上，因为团队一直在使用sass + compass，所以选定sass + compass来作为css模板，所使用的gulp插件为： <strong>gulp-ruby-sass</strong>。</p>
-
-<h2>
-<a id="js" class="anchor" href="#js" aria-hidden="true"><span class="octicon octicon-link"></span></a>js</h2>
-
-<p>由于并没有接触到太深的js编写，因此没有选定js的编写格式。还请各位指点一下，让我更好的选定js的模板。</p>
-
-<p>目前gulp可以通过插件，实现js的压缩/丑化，语法检查，合并，打包等功能，还有更多上面没有讲到，但是需要的，也请跟我说说哦，我回去查查看有没有相应的插件可供使用。</p>
-
-<hr>
-
-<h3>
-<a id="7-我认为的文件目录结构--app-build" class="anchor" href="#7-%E6%88%91%E8%AE%A4%E4%B8%BA%E7%9A%84%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84--app-build" aria-hidden="true"><span class="octicon octicon-link"></span></a>7. 我认为的文件目录结构 —— app, build*</h3>
-
-<p>在“奇迹战神”官网中，我尝试着探索了许多的文档目录结构。</p>
-
-<p>由于gulp是一个自动化构建工具，它会把我们写好的开发文件逐一经过指定任务进行处理，形如 *.ejs 最终被输出成 *.html， *.scss 最终被输出成 *.css。</p>
-
-<p>结合需求与gulp的特性，并多番思考，我认为对于我们的项目而言，以下目录结构是最为合适的。</p>
-
-<p>在主目录下，目录结构如下：</p>
-
-<pre><code>- /app          //存放构建前的文件。这是我们手写代码主要存放的位置
-    - *.ejs
-    - ejsData.json
-    - /style
-        - *.css
-    - /images
-        - *.{ png, jpg, ... }
-- /build            //存放构建后的文件
-    - *.html            //ejs构建后生成的html文件
-    - /css          
-        - *.css         // /style目录中的*.scss文件构建后存放与此
-    - /js
-        - *.js          //尚未实现构建，所有的js文件直接编辑并存放于此。
-    - /images
-        - *.{ png, jpg, ... }   //存放经过imagemin压缩后的图片
-- /node_modules     //nodeJS的插件存放位置
-- gulpfile.js       //gulp的配置文件
-- package.json      //nodeJs的配置文件
-- congif.rb         //compass的配置文件
-</code></pre>
-
-      <footer class="site-footer">
-
-        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
-      </footer>
-
-    </section>
-
-  
-  </body>
-</html>
+{% endif %}
