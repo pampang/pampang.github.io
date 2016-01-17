@@ -4,7 +4,7 @@ header-img: "img/facebook.jpg"
 tagline: "cn"  
 description: "庞伟湛"  
 baseurl: ""
-url: "http://cnfeat"  
+url: ""
 
 # About/contact
 owner: 
@@ -16,12 +16,7 @@ owner:
 gavatar: http://dreamofbook.qiniudn.com/Az..png
 favicon: img/favicon.png
 
-douban_username:  cnfeat
-twitter_username: feat
-github_username: cnfeat
-facebook_username: 
-weibo_username: cnfeat 
-zhihu_username: feat
+github_username: pampang
 
 # Build settings  
 # use Github Flavored Markdown !important  
@@ -29,12 +24,15 @@ zhihu_username: feat
 markdown: kramdown
 highlighter: pygments
 permalink: pretty
-paginate: 8
 exclude: ["less","node_modules","Gruntfile.js","package.json","README.md"]
-relative_permalinks: true
+
+# Gems
+gems: [jekyll-paginate]
+paginate: 8
+paginate_path: "page:num"
 
 # http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-timezone: Asia/Shanghai
+timezone: Asia/Guangzhou
 
 # Defaults for posts
 defaults:
@@ -44,16 +42,16 @@ defaults:
       type: "posts"
     values:
       layout: "post"
-      author: "CnFeat"
+      author: "pampang"
       header-img: "img/facebook.jpg" # We don't want posts without a header image, that whould mean white on white
 
 # Comments 
 comments :
   provider : duoshuo
   duoshuo :
-    short_name : cnfeat
+    short_name : pampang
   disqus :
-      short_name : cnfeat
+      short_name : pampang
 
 # Analytics and webmaster tools stuff goes here
 google_analytics: 
