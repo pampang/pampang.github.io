@@ -1,7 +1,7 @@
 # Windows下安装React Native的安卓环境 #
 ---
 
-###目录
+### 目录
 
 1. 安装Java SDK
 1. 安装Android SDK
