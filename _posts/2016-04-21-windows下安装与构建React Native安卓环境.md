@@ -20,7 +20,8 @@
 这个可以自行谷歌教程，安装之后记得配置**环境变量**即可。
 附官方下载地址：http://www.oracle.com/technetwork/java/javase/downloads/index.html
 
-####注意：
+#### 注意：
+
 1. 需要配置环境变量，PATH
 1. 需要配置JAVA_HOME环境变量，这个需要自行创建，RN在编译时需要这个变量。
 
@@ -44,29 +45,30 @@
 
 推荐使用代理来安装。在http://androiddevtools.cn/ 最上方边有很详细的代理配置方法。
 
-####注意：
+#### 注意：
+
 1. 需要配置环境变量，PATH
 2. 还要将其文件夹下面的tools路径配置到环境变量中。**具体建议百度，大把教程。**
 1. 需要配置ANDROID_HOME环境变量，这个需要自行创建，RN在编译时需要这个变量。
 
-##3、安装C++环境
+## 3、安装C++环境
 
 直接安装Visual Studio 2013/2015即可将整个C++环境都搞定。
 推荐下载地址：http://tieba.baidu.com/p/4102221157
 
-##4、安装Python环境
+## 4、安装Python环境
 
 推荐python v2.7。直接下载并安装即可。
 http://lihuipeng.blog.51cto.com/3064864/850562
 
-##5、（可选）安装Android Studio
+## 5、（可选）安装Android Studio
 
 这个是编写android很好的集成IDE，类似Visual Studio等。但是我不建议使用，因为太复杂了，我也不会用。。。
 直接使用SDK Manager等便可很好的完成任务，无须用到AS。
 
 在http://androiddevtools.cn/ 下即可安装到Android Studio了。下载下来是一个RAR，直接解压到想要放的文件夹内，即可使用了。
 
-##6、安装react-native-cli
+## 6、安装react-native-cli
 
 没理由没用过NodeJS吧？
 直接一句命令：
@@ -76,7 +78,7 @@ http://lihuipeng.blog.51cto.com/3064864/850562
 ```
 然后`react native`这个命令就可以全局使用啦。
 
-##7、初始化我的第一个React Native项目
+## 7、初始化我的第一个React Native项目
 
 同样也是一句命令：
 
@@ -87,7 +89,7 @@ http://lihuipeng.blog.51cto.com/3064864/850562
 在创建过程中需要下载东西，例如React-Native等依赖，因此会很慢。
 并未确定，但我估计很大概率需要翻墙环境。
 
-##8、运行我的React Native项目
+## 8、运行我的React Native项目
 
 命令行切到AwesomeProject/目录下，直接运行：
 
@@ -127,11 +129,12 @@ OK，下载安装之后，我们就可以部署我们的设备了。点击'Add'�
 **推荐直接使用OpenConnect开启VPN。**
 
 
-##10、连接我的真机设备
+## 10、连接我的真机设备
 
 OK，到了使用我们手上真机的时刻了。
 首先进入到设备的开发者选项中，勾选“USB调试”选项。
 确认安装好手机相应的驱动之后，在命令行中输入：
+
 ```
 	adb devices
 ```
@@ -160,18 +163,22 @@ OK，到了使用我们手上真机的时刻了。
 
 OK，这时候我们的设备已经连接成功了。
 
-##11、在我的虚拟机或者真机上运行项目
+## 11、在我的虚拟机或者真机上运行项目
 
 将命令行切到项目的根目录下，现在一个终端下运行：
+
 ```
 	// 打开RN服务器
 	react-native start
 ```
+
 运行
+
 ```
 	// 将项目注入到设备中
 	react-native run-androi
 ```
+
 RN就会帮我们编译项目，并将打包出来的apk安装到我们的设备中。
 一般来说，genymotion创建出来的虚拟机设备是没有任何问题的。
 但是我手上的魅族魅蓝metal设备则出现了无法安装的问题。
@@ -179,6 +186,7 @@ RN就会帮我们编译项目，并将打包出来的apk安装到我们的设备
 经过大量查阅，发现
 http://csbun.github.io/blog/2015/12/starting-react-native-with-android/
 这一文章中提出到一个方法：
+
 ```
 	//  android/build.gradle 第 8 行的版本号改成 1.2.3 即可
 	
@@ -214,6 +222,7 @@ http://csbun.github.io/blog/2015/12/starting-react-native-with-android/
 ## P.S.
 
 在window下，我们可以在虚拟机里面按**"F1"**打开可选菜单，包括:
+
 - debug in chrome
 - enable hot reloading
 - 。。。
