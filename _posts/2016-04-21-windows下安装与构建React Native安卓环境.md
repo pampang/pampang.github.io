@@ -7,7 +7,7 @@
 1. 安装Android SDK
 1. 安装C++环境
 2. 安装python环境
-2. （可选）安装Android Studio（安卓编辑环境）
+2. （可选）安装Android Studio（安卓编辑IDE）
 3. 安装react-native-cli
 4. 初始化我的第一个React Native项目
 5. 运行我的React Native项目
