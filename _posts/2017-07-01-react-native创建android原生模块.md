@@ -10,9 +10,9 @@ https://community.jiguang.cn/t/react-native-android/12126
 
 # 具体操作
 
-## 1、在mall下创建一个module
+### 1) 创建一个新的module
 
-#### 1) 需要切换到project目录结构，然后对着mall来进行创建。或者直接在android目录结构下，空白位置右键，new一个module出来。
+具体操作：需要切换到project目录结构，然后对着项目根目录来进行创建。或者直接在android目录结构下，空白位置右键，new一个module出来。
 
 ![android1](http://osd9kk2in.bkt.clouddn.com/2017-07-01-android1.png)
 
@@ -21,12 +21,12 @@ https://community.jiguang.cn/t/react-native-android/12126
 
 找到module的位置，然后将其迁移到对应的文件夹中，并将文件夹改名为android
 
-#### 2) 在app/build.gradle下面，添加compile project
+### 2) 在app/build.gradle下面，添加compile project
 
 ![android3](http://osd9kk2in.bkt.clouddn.com/2017-07-01-android3.png)
 
 
-#### 3) 打开新创建的module下的build.gradle，加入必须的compile project
+### 3) 打开新创建的module下的build.gradle，加入必须的compile project
 
 ![android4](http://osd9kk2in.bkt.clouddn.com/2017-07-01-android4.png)
 
@@ -34,7 +34,7 @@ https://community.jiguang.cn/t/react-native-android/12126
 然后，可以添加Module下所需的compile依赖，并添加依赖额外安装的路径（mavenCentral()）
 
 
-#### 4) 在新创建的module下创建对应的java文件，包括：
+### 4) 在新创建的module下创建对应的java文件，包括：
 
 ```
 1/ module文件： RNUmengAnalytics[Module]
@@ -114,11 +114,11 @@ public class RNUmengAnalyticsPackage implements ReactPackage {
 }
 ```
 
-#### 5) 在MainApplication里添加新创建的package
+### 5) 在MainApplication里添加新创建的package
 
 ![android8](http://osd9kk2in.bkt.clouddn.com/2017-07-01-android8.png)
 
-#### 6) 迁移时刻
+### 6) 迁移时刻
 将创建的module迁移到node_modules下，再从node_modules引入该项目。
 新创建的module会出现在android/目录下。
 直接将其剪切到对应的npm仓库里面去，将目录名字改为android。
@@ -126,6 +126,6 @@ public class RNUmengAnalyticsPackage implements ReactPackage {
 
 ![android9](http://osd9kk2in.bkt.clouddn.com/2017-07-01-android9.png)
 
-# 再次gradle sync，大功告成！
+### 再次gradle sync，大功告成！
 
 
