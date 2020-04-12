@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>2095CB115768ED4863862368FFF918BE</key>
+	<array>
+		<dict>
+			<key>localURL</key>
+			<string>%E5%8F%8C%E6%8B%BC-%E6%89%93%E5%AD%97.jpg</string>
+			<key>remoteURL</key>
+			<string>http://
+osd9kk2in.bkt.clouddn.com/双拼-打字.jpg</string>
+		</dict>
+		<dict>
+			<key>localURL</key>
+			<string>%E5%B0%8F%E9%B9%A4%E5%8F%8C%E6%8B%BC-%E9%94%AE%E4%BD%8D%E5%9B%BE-%E9%AB%98%E6%B8%85.png</string>
+			<key>remoteURL</key>
+			<string>http://
+osd9kk2in.bkt.clouddn.com/小鹤双拼-键位图-高清.png</string>
+		</dict>
+		<dict>
+			<key>localURL</key>
+			<string>%E5%85%AC%E5%8F%B7%E4%BA%8C%E7%BB%B4%E7%A0%81%E4%B8%AD.png</string>
+			<key>remoteURL</key>
+			<string>http://
+osd9kk2in.bkt.clouddn.com/公号二维码中.png</string>
+		</dict>
+	</array>
+	<key>selectedItem</key>
+	<string>2095CB115768ED4863862368FFF918BE</string>
+</dict>
+</plist>
